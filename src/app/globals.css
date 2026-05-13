@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
+
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #1a1a1a;
+}
+
+.btn-primary {
+  background-color: #790d7f;
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-outline {
+  border: 2px solid white;
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  transition: 0.2s;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: #790d7f;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #790d7f;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
