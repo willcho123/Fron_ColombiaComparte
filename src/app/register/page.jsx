@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
 
+
 import api from "@/services/api";
 
 const paises = [
@@ -36,6 +37,7 @@ export default function RegisterPage() {
   respuesta_seguridad: "",
   email: "",
   password: "",
+  rol_id: 3, 
 });
 
   const handleChange = (e) => {

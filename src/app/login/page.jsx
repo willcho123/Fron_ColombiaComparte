@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -17,9 +16,7 @@ const paises = [
 ];
 
 export default function LoginPage() {
-
   const router = useRouter();
-
   const { login } = useAuth();
 
   const [form, setForm] = useState({
@@ -31,7 +28,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -39,53 +35,34 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-
     setLoading(true);
 
     try {
+      const response = await api.post("/auth/login", form);
 
-      const response = await api.post(
-        "/auth/login",
-        form
-      );
-
-      login(
-        response.data.token,
-        response.data.user
-      );
+      login(response.data.token, response.data.user);
 
       router.push("/");
-
     } catch (error) {
-
       if (axios.isAxiosError(error)) {
-
         alert(
-          error.response?.data?.message ||
-          "Error al iniciar sesión"
+          error.response?.data?.message || "Error al iniciar sesión"
         );
-
       } else {
-
         alert("Error inesperado");
       }
-
     } finally {
-
       setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 px-6">
-
       <form
         onSubmit={handleSubmit}
         className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md"
       >
-
         <h1 className="text-3xl font-bold text-center mb-2">
           CMS Multipaís
         </h1>
@@ -96,11 +73,7 @@ export default function LoginPage() {
 
         {/* PAÍS */}
         <div className="mb-4">
-
-          <label className="block mb-2 font-medium">
-            País
-          </label>
-
+          <label className="block mb-2 font-medium">País</label>
           <select
             name="pais_id"
             value={form.pais_id}
@@ -108,29 +81,18 @@ export default function LoginPage() {
             className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-slate-900"
             required
           >
-            <option value="">
-              Seleccione un país
-            </option>
-
+            <option value="">Seleccione un país</option>
             {paises.map((pais) => (
-              <option
-                key={pais.id}
-                value={pais.id}
-              >
+              <option key={pais.id} value={pais.id}>
                 {pais.nombre}
               </option>
             ))}
           </select>
-
         </div>
 
         {/* USUARIO */}
         <div className="mb-4">
-
-          <label className="block mb-2 font-medium">
-            Usuario
-          </label>
-
+          <label className="block mb-2 font-medium">Usuario</label>
           <input
             type="text"
             name="username"
@@ -140,16 +102,11 @@ export default function LoginPage() {
             className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-slate-900"
             required
           />
-
         </div>
 
         {/* PASSWORD */}
         <div className="mb-2">
-
-          <label className="block mb-2 font-medium">
-            Contraseña
-          </label>
-
+          <label className="block mb-2 font-medium">Contraseña</label>
           <input
             type="password"
             name="password"
@@ -159,29 +116,16 @@ export default function LoginPage() {
             className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-slate-900"
             required
           />
-
         </div>
 
         {/* RECUPERAR */}
         <div className="text-right mb-6">
-
           <Link
             href="/forgot-password"
             className="text-sm text-[#790d7f] hover:underline"
           >
             ¿Olvidaste tu contraseña?
           </Link>
-
-        </div>
-                <div className="text-right mb-6">
-
-          <Link
-            href="/security-question"
-            className="text-sm text-[#790d7f] hover:underline"
-          >
-            Guardar tu pregunta de seguridad
-          </Link>
-
         </div>
 
         {/* BOTÓN LOGIN */}
@@ -190,14 +134,11 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-lg transition"
         >
-          {loading
-            ? "Ingresando..."
-            : "Iniciar sesión"}
+          {loading ? "Ingresando..." : "Iniciar sesión"}
         </button>
 
         {/* ACCIONES */}
         <div className="mt-6 flex flex-col gap-3">
-
           <Link
             href="/register"
             className="w-full border border-slate-900 text-slate-900 p-3 rounded-lg text-center hover:bg-slate-100 transition"
@@ -211,11 +152,8 @@ export default function LoginPage() {
           >
             Volver al inicio
           </Link>
-
         </div>
-
       </form>
-
     </div>
   );
 }
